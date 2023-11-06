@@ -1,20 +1,53 @@
-import React, { Component, memo, PureComponent } from "react";
+import React, { PureComponent, createRef } from "react";
+class PureCompo extends PureComponent {
+  constructor() {
+    super();
+    this.state = {
+      name: "",
+    };
+    this.counter = 0;
+    this.myinput = createRef();
+  }
+  handleChangeName = () => {
+    this.setState({
+      name: this.myinput.current.value,
+    });
+  };
+  componentDidMount() {
+    this.myinput.current.focus();
+  }
+  render() {
+    return (
+      <div className="form-fa-group text-center mt-4 p-3">
+        <h4 className="text-center text-dark">حدث کلمه</h4>
 
-// class PureCompo extends PureComponent{
-//     render(){
-//         console.log("pure component");
-//         return(
-//             <h2 className="text-center mt-4">
-//                 {"pure component :" + this.props.name}
-//             </h2>
-//         )
-//     }
-// }
+        <input
+          ref={this.myinput}
+          type="text"
+          className="form-control"
+          autoComplete="off"
+        />
 
-const PureCompo = (props) => {
-  return (
-    <h2 className="text-center mt-4">{"pure component :" + props.name}</h2>
-  );
-};
+        <button
+          className="btn btn-warning my-3"
+          onClick={this.handleChangeName}
+        >
+          ثبت
+        </button>
 
-export default memo(PureCompo);
+        <button
+          className="btn btn-secondary my-3 mx-2"
+          onClick={() => {
+            this.myinput.current.value = "";
+          }}
+        >
+          مخفی
+        </button>
+        <br />
+        <span>{this.counter++}</span>
+      </div>
+    );
+  }
+}
+
+export default PureCompo;
