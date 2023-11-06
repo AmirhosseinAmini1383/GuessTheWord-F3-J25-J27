@@ -1,24 +1,18 @@
 import React, { Component, createRef } from "react";
-import PureCompo from "./PureComponent";
+import Fcomponent from "./Fcomponent";
 
 class ParentCompo extends Component {
   constructor() {
     super();
-    this.ComponentRef = createRef();
+    this.myInput = createRef();
   }
-  // handleChangeComponentName = () => {
-  //   this.ComponentRef.current.handleChangeName();
-  // };
+  componentDidMount() {
+    this.myInput.current.focus();
+  }
   render() {
     return (
       <div>
-        <PureCompo ref={this.ComponentRef} />
-        {/* <button
-          className="btn btn-info my-3"
-          onClick={this.handleChangeComponentName}
-        >
-          تست
-        </button> */}
+        <Fcomponent ref={this.myInput} />
       </div>
     );
   }
